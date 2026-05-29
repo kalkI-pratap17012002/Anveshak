@@ -1,10 +1,5 @@
-<p align="center">
-  <img src="assets/logo.png" alt="Anveshak Logo" width="120"/>
-  <br/>
-  <img src="assets/title.svg" alt="Anveshak" width="340"/>
-  <br/>
-  <b><i><big><big>Unmask the hidden before the world does</big></big></i></b>
-</p>
+<h1 align="center">🔍 Anveshak</h1>
+<p align="center"><b><i>AI-Powered Autonomous Penetration Testing Framework</i></b></p>
 <p align="center" style="font-size: 120%;">
   An autonomous AI framework that chains reconnaissance, exploitation, and post-exploitation into a single pipeline, then goes further by triaging every finding, implementing code fixes, and opening pull requests on your repository. From first packet to merged patch, with human oversight at every critical step.
 </p>
@@ -92,34 +87,6 @@ Anveshak doesn't stop at finding vulnerabilities, it fixes them. The pipeline st
 <p align="center">
 <img src="assets/cypherfix.gif" alt="CypherFix demo" width="100%"/>
 </p>
-
----
-
-## Roadmap & Community Contributions
-
-We maintain a public **[Project Board](https://github.com/users/samugit83/projects/1)** with upcoming features open for community contributions. Pick a task and submit a PR!
-
-
-> **Want to contribute?** See [CONTRIBUTING.md](CONTRIBUTING.md) for how to get started.
-
-### Maintainers
-
-<table>
-<tr>
-<td align="center" valign="top" width="50%">
-<img src="assets/samuele.png" alt="Samuele Giampieri" width="120"/><br/>
-<b>Samuele Giampieri</b>: Creator, Maintainer & AI Platform Architect<br/><br/>
-<small>AI Platform Architect & Full-Stack Lead with 15+ years of freelancing experience and more than 30 projects shipped to production, including enterprise-scale AI agentic systems. AWS-certified (DevOps Engineer, ML Specialty) and IBM-certified AI Engineer. Designs end-to-end ML solutions spanning deep learning, NLP, Computer Vision, and AI Agent systems with LangChain/LangGraph.</small><br/><br/>
-<a href="https://www.linkedin.com/in/samuele-giampieri-b1b67597/">LinkedIn</a> · <a href="https://github.com/samugit83">GitHub</a> · <a href="https://www.devergolabs.com/">Devergo Labs</a>
-</td>
-<td align="center" valign="top" width="50%">
-<img src="assets/ritesh.png" alt="Ritesh Gohil" width="120"/><br/>
-<b>Ritesh Gohil</b>: Maintainer & Lead Security Researcher<br/><br/>
-<small>Cyber Security Engineer at Workday with over 7 years of experience in Web, API, Mobile, Network, and Cloud penetration testing. Published 11 CVEs in MITRE, with security acknowledgements from Google (4×) and Apple (6×). Secured 200+ web and mobile applications and contributed to Exploit Database, Google Hacking Database, and the AWS Community. Holds AWS Security Specialty, eWPTXv2, eCPPTv2, CRTP, and CEH certifications with expertise in red teaming, cloud security, CVE research, and security architecture review.</small><br/><br/>
-<a href="https://www.linkedin.com/in/riteshgohil25/">LinkedIn</a> · <a href="https://github.com/L4stPL4Y3R">GitHub</a>
-</td>
-</tr>
-</table>
 
 ---
 
@@ -874,20 +841,6 @@ Videos, writeups, and real-world experiences from security professionals using A
 ## Contributing
 
 Contributions are welcome! Please read [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines on how to get started, code style conventions, and the pull request process.
-
----
-
-## Maintainers
-
-**Samuele Giampieri**: creator, maintainer & AI platform architect · [LinkedIn](https://www.linkedin.com/in/samuele-giampieri-b1b67597/) · [GitHub](https://github.com/samugit83) · [Devergo Labs](https://www.devergolabs.com/)
-
-**Ritesh Gohil**: maintainer & lead security researcher · [LinkedIn](https://www.linkedin.com/in/riteshgohil25/) · [GitHub](https://github.com/L4stPL4Y3R)
-
----
-
-## Contact
-
-For questions, feedback, or collaboration inquiries: **devergo.sam@gmail.com**
 
 ---
 
