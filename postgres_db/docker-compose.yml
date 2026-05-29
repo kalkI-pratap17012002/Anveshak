@@ -1,0 +1,21 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: anveshak-postgres
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-anveshak}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-anveshak_secret}
+      POSTGRES_DB: ${POSTGRES_DB:-anveshak}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-anveshak} -d ${POSTGRES_DB:-anveshak}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  postgres_data:
