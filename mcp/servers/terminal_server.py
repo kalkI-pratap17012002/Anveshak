@@ -73,9 +73,9 @@ async def _read_init_frame(ws, timeout: float = 0.5):
                 user_id = str(msg.get("user_id", "")).strip()
                 project_id = str(msg.get("project_id", "")).strip()
                 if user_id:
-                    tenant_env["REDAMON_USER_ID"] = user_id
+                    tenant_env["ANVESHAK_USER_ID"] = user_id
                 if project_id:
-                    tenant_env["REDAMON_PROJECT_ID"] = project_id
+                    tenant_env["ANVESHAK_PROJECT_ID"] = project_id
                 logger.info(
                     "Init frame received (user=%s project=%s)",
                     user_id or "<none>", project_id or "<none>",

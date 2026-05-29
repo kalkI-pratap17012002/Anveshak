@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
-redagraph — Tenant-scoped CLI for the Anveshak graph database.
+anveshakgraph — Tenant-scoped CLI for the Anveshak graph database.
 
-Runs inside kali-sandbox. Reads REDAMON_USER_ID and REDAMON_PROJECT_ID from
+Runs inside kali-sandbox. Reads ANVESHAK_USER_ID and ANVESHAK_PROJECT_ID from
 the environment (injected by the terminal server when launched from the
 webapp Graph -> Terminal tab) and silently scopes every Cypher query to that
 tenant. Supports raw Cypher, natural-language questions (text-to-cypher via
@@ -33,11 +33,11 @@ def _eprint(*args, **kwargs) -> None:
 
 
 def _require_tenant() -> tuple[str, str]:
-    user_id = os.environ.get("REDAMON_USER_ID", "").strip()
-    project_id = os.environ.get("REDAMON_PROJECT_ID", "").strip()
+    user_id = os.environ.get("ANVESHAK_USER_ID", "").strip()
+    project_id = os.environ.get("ANVESHAK_PROJECT_ID", "").strip()
     if not user_id or not project_id:
         _eprint(
-            "redagraph: no active project. Open the terminal via the webapp "
+            "anveshakgraph: no active project. Open the terminal via the webapp "
             "Graph -> Terminal tab so the project context is set."
         )
         sys.exit(2)
@@ -102,7 +102,7 @@ def _node_display(coerced: Any) -> Any:
     `key=value key=value ...` form so all properties survive the trip to text.
     The CLI deliberately does NOT pick a single attribute — that would override
     the user's NL intent (e.g. when they asked "return all attributes").
-    Use `redagraph -f json` for full structured output."""
+    Use `anveshakgraph -f json` for full structured output."""
     if isinstance(coerced, dict) and coerced.get("_kind") in ("node", "relationship"):
         props = coerced.get("properties", {})
         return " ".join(f"{k}={_to_plain(v)}" for k, v in props.items())
@@ -140,7 +140,7 @@ def _emit(records: List, fmt: str, out) -> None:
 def _execute(cypher: str, user_id: str, project_id: str, require_labels: bool = True) -> List:
     bad = find_disallowed_write_operation(cypher)
     if bad:
-        _eprint(f"redagraph: write operation rejected ({bad}). This CLI is read-only.")
+        _eprint(f"anveshakgraph: write operation rejected ({bad}). This CLI is read-only.")
         sys.exit(3)
 
     # The tenant filter only injects on labelled node patterns. A query with no
@@ -149,8 +149,8 @@ def _execute(cypher: str, user_id: str, project_id: str, require_labels: bool = 
     # filters with $tenant_user_id / $tenant_project_id.
     if require_labels and not _LABEL_NODE_RE.search(cypher):
         _eprint(
-            "redagraph: query has no labelled node patterns; tenant filter cannot "
-            "scope it. Add a label, e.g. (n:Subdomain), or use `redagraph types`."
+            "anveshakgraph: query has no labelled node patterns; tenant filter cannot "
+            "scope it. Add a label, e.g. (n:Subdomain), or use `anveshakgraph types`."
         )
         sys.exit(3)
 
@@ -169,7 +169,7 @@ def cmd_whoami(args, _user_id: str, _project_id: str) -> int:
     print(f"user_id    {_user_id}")
     print(f"project_id {_project_id}")
     print(f"neo4j_uri  {os.environ.get('NEO4J_URI', 'bolt://neo4j:7687')}")
-    print(f"agent_url  {os.environ.get('REDAMON_AGENT_URL', 'http://agent:8080')}")
+    print(f"agent_url  {os.environ.get('ANVESHAK_AGENT_URL', 'http://agent:8080')}")
     return 0
 
 
@@ -202,11 +202,11 @@ def cmd_schema(args, user_id: str, project_id: str) -> int:
 def cmd_ls(args, user_id: str, project_id: str) -> int:
     label = args.node_type
     if not label.isidentifier():
-        _eprint(f"redagraph: invalid node type {label!r}")
+        _eprint(f"anveshakgraph: invalid node type {label!r}")
         return 2
     attr = args.attr
     if not attr.replace("_", "").isalnum():
-        _eprint(f"redagraph: invalid attribute {attr!r}")
+        _eprint(f"anveshakgraph: invalid attribute {attr!r}")
         return 2
 
     limit_clause = f" LIMIT {int(args.limit)}" if args.limit else ""
@@ -229,7 +229,7 @@ def cmd_cypher(args, user_id: str, project_id: str) -> int:
 def cmd_ask(args, user_id: str, project_id: str) -> int:
     import requests
 
-    agent_url = os.environ.get("REDAMON_AGENT_URL", "http://agent:8080").rstrip("/")
+    agent_url = os.environ.get("ANVESHAK_AGENT_URL", "http://agent:8080").rstrip("/")
     question = " ".join(args.question) if isinstance(args.question, list) else args.question
     try:
         resp = requests.post(
@@ -245,7 +245,7 @@ def cmd_ask(args, user_id: str, project_id: str) -> int:
             timeout=120,
         )
     except requests.RequestException as e:
-        _eprint(f"redagraph: cannot reach agent at {agent_url}: {e}")
+        _eprint(f"anveshakgraph: cannot reach agent at {agent_url}: {e}")
         return 4
 
     if resp.status_code != 200:
@@ -253,12 +253,12 @@ def cmd_ask(args, user_id: str, project_id: str) -> int:
             err = resp.json().get("error", resp.text)
         except Exception:
             err = resp.text
-        _eprint(f"redagraph: agent returned {resp.status_code}: {err}")
+        _eprint(f"anveshakgraph: agent returned {resp.status_code}: {err}")
         return 4
 
     cypher = resp.json().get("cypher", "").strip()
     if not cypher:
-        _eprint("redagraph: agent returned empty Cypher")
+        _eprint("anveshakgraph: agent returned empty Cypher")
         return 4
 
     if args.show:
@@ -271,7 +271,7 @@ def cmd_ask(args, user_id: str, project_id: str) -> int:
 
 def build_parser() -> argparse.ArgumentParser:
     p = argparse.ArgumentParser(
-        prog="redagraph",
+        prog="anveshakgraph",
         description="Tenant-scoped graph CLI for Anveshak. Read-only.",
     )
     p.add_argument(
@@ -324,7 +324,7 @@ def main(argv: Optional[List[str]] = None) -> int:
         try:
             f = open(args.output, "w", encoding="utf-8")
         except OSError as e:
-            _eprint(f"redagraph: cannot open {args.output}: {e}")
+            _eprint(f"anveshakgraph: cannot open {args.output}: {e}")
             return 2
         sys.stdout = f
         try:

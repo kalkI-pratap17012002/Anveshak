@@ -11,7 +11,7 @@ import {
   DISCLAIMER_VERSION,
   DISCLAIMER_STORAGE_KEY,
   DISCLAIMER_GITHUB_URL,
-  REDAMON_GITHUB_URL,
+  ANVESHAK_GITHUB_URL,
   WIKI_URL,
 } from '@/lib/disclaimerVersion'
 import styles from './DisclaimerGate.module.css'
@@ -120,7 +120,7 @@ export function DisclaimerGate({ children }: DisclaimerGateProps) {
           <div className={styles.welcomeHeader}>
             <Image src="/logo.png" alt="Anveshak" width={36} height={36} style={{ objectFit: 'contain' }} />
             <h1 className={styles.welcomeTitle}>
-              Welcome to <span className={styles.logoAccent}>Red</span>Amon
+              Welcome to Anveshak
             </h1>
           </div>
 
@@ -152,7 +152,7 @@ export function DisclaimerGate({ children }: DisclaimerGateProps) {
             </div>
 
             <a
-              href={REDAMON_GITHUB_URL}
+              href={ANVESHAK_GITHUB_URL}
               target="_blank"
               rel="noopener noreferrer"
               className={styles.starLink}

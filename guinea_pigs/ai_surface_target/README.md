@@ -112,9 +112,9 @@ Each port runs an `aiohttp` app that returns an HTML page on `/`. The `Server:` 
 | 8001  | triton-or-vllm    | `triton-server/24.05`  | `Triton API`   | — (disambiguate)      | triton       |
 | 8080  | open-webui        | `nginx/1.18`           | `Open WebUI`   | — (disambiguate);  http_probe title regex DOES fire | — |
 
-**Catalog ports owned by Redamon services** — three catalog disambiguate ports are NOT bound here because Redamon services already publish them on the host:
+**Catalog ports owned by Anveshak services** — three catalog disambiguate ports are NOT bound here because Anveshak services already publish them on the host:
 
-| Catalog port | Catalog name              | Redamon owner                 |
+| Catalog port | Catalog name              | Anveshak owner                 |
 |-------------:|---------------------------|-------------------------------|
 | 8000         | vllm-or-chroma-or-langserve | kali-sandbox (MCP network-recon) |
 | 8002         | triton-metrics            | kali-sandbox (MCP nuclei)     |

@@ -23,7 +23,7 @@ from urllib.parse import parse_qs, urlparse
 SOURCE_NAME = "zap_ajax_spider"
 ZAP_CONTEXT_NAME = "anveshak-zap-ajax-context"
 _URL_RE = re.compile(r"https?://[^\s\"'<>,]+", re.IGNORECASE)
-_DEBUG_ENV = "REDAMON_ZAP_AJAX_DEBUG"
+_DEBUG_ENV = "ANVESHAK_ZAP_AJAX_DEBUG"
 
 
 def _has_control_chars(value: str) -> bool:

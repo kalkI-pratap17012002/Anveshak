@@ -186,7 +186,7 @@ ENV PATH="/opt/venv/bin:$PATH"
 COPY requirements.txt /tmp/requirements.txt
 RUN pip install --no-cache-dir -r /tmp/requirements.txt
 
-# Neo4j driver for the redagraph CLI (tenant-scoped graph queries from the shell)
+# Neo4j driver for the anveshakgraph CLI (tenant-scoped graph queries from the shell)
 RUN pip install --no-cache-dir neo4j
 
 # Install API security testing tools (Python-based)
@@ -411,10 +411,10 @@ RUN mkdir -p /opt/mcp_servers /opt/output
 # Copy MCP servers
 COPY servers/ /opt/mcp_servers/
 
-# Expose redagraph CLI on PATH (script lives in the volume-mounted servers dir,
+# Expose anveshakgraph CLI on PATH (script lives in the volume-mounted servers dir,
 # so iteration does not require a rebuild — only the symlink does).
-RUN chmod +x /opt/mcp_servers/redagraph.py \
-    && ln -sf /opt/mcp_servers/redagraph.py /usr/local/bin/redagraph
+RUN chmod +x /opt/mcp_servers/anveshakgraph.py \
+    && ln -sf /opt/mcp_servers/anveshakgraph.py /usr/local/bin/anveshakgraph
 
 # Anveshak MOTD hint shown after the Kali login banner.
 COPY kali-sandbox/anveshak-motd.sh /etc/profile.d/zz-anveshak-motd.sh

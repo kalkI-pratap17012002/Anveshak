@@ -55,7 +55,7 @@ export default function LoginPage() {
           <div className={styles.logoRow}>
             <Image src="/logo.png" alt="Anveshak" width={40} height={40} priority />
             <span className={styles.logoText}>
-              <span className={styles.logoAccent}>Red</span>Amon
+              Anveshak
             </span>
           </div>
           <p className={styles.subtitle}>Sign in to your account</p>
@@ -106,8 +106,8 @@ export default function LoginPage() {
 
         <div className={styles.footer}>
           <span className={styles.version}>
-            {process.env.NEXT_PUBLIC_REDAMON_VERSION
-              ? `v${process.env.NEXT_PUBLIC_REDAMON_VERSION}`
+            {process.env.NEXT_PUBLIC_ANVESHAK_VERSION
+              ? `v${process.env.NEXT_PUBLIC_ANVESHAK_VERSION}`
               : 'Anveshak'}
           </span>
         </div>

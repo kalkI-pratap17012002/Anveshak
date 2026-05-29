@@ -110,8 +110,8 @@ check_prerequisites() {
 }
 
 export_version() {
-    export REDAMON_VERSION
-    REDAMON_VERSION="$(get_version)"
+    export ANVESHAK_VERSION
+    ANVESHAK_VERSION="$(get_version)"
 }
 
 ensure_auth_secrets() {

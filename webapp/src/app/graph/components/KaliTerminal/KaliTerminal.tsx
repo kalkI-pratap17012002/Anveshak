@@ -281,7 +281,7 @@ export const KaliTerminal = memo(function KaliTerminal({ userId, projectId }: Ka
   }, [connect])
 
   // Reconnect when the active project/user changes so the sandbox shell
-  // restarts with fresh REDAMON_USER_ID / REDAMON_PROJECT_ID env vars.
+  // restarts with fresh ANVESHAK_USER_ID / ANVESHAK_PROJECT_ID env vars.
   // The first run is suppressed: the mount-effect above already calls connect()
   // — letting this fire on initial mount would race into disconnect+reconnect,
   // doubling banners and dropping MOTD output from the killed first shell.

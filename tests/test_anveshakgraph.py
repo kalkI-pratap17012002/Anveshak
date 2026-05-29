@@ -1,9 +1,9 @@
 """
-Tests for the redagraph CLI and its tenant-scoping helpers.
+Tests for the anveshakgraph CLI and its tenant-scoping helpers.
 
 Covers:
 - graph_db.tenant_filter (unit)
-- mcp/servers/redagraph.py helpers + parser (unit)
+- mcp/servers/anveshakgraph.py helpers + parser (unit)
 - mcp/servers/terminal_server.py _read_init_frame (integration with mock WS)
 """
 import asyncio
@@ -35,7 +35,7 @@ _graph_db_stub.__path__ = [os.path.join(REPO_ROOT, "graph_db")]
 sys.modules["graph_db"] = _graph_db_stub
 
 tf = _load_module("graph_db.tenant_filter", os.path.join(REPO_ROOT, "graph_db", "tenant_filter.py"))
-rg = _load_module("redagraph", os.path.join(REPO_ROOT, "mcp", "servers", "redagraph.py"))
+rg = _load_module("anveshakgraph", os.path.join(REPO_ROOT, "mcp", "servers", "anveshakgraph.py"))
 ts = _load_module("terminal_server", os.path.join(REPO_ROOT, "mcp", "servers", "terminal_server.py"))
 
 
@@ -139,7 +139,7 @@ class TestFindDisallowedWriteOperation(unittest.TestCase):
 
 
 # =============================================================================
-# redagraph helpers
+# anveshakgraph helpers
 # =============================================================================
 class TestToPlain(unittest.TestCase):
     def test_none(self):
@@ -288,12 +288,12 @@ class TestRequireTenant(unittest.TestCase):
             self.assertEqual(cm.exception.code, 2)
 
     def test_returns_pair_when_set(self):
-        env = {"REDAMON_USER_ID": "U", "REDAMON_PROJECT_ID": "P"}
+        env = {"ANVESHAK_USER_ID": "U", "ANVESHAK_PROJECT_ID": "P"}
         with mock.patch.dict(os.environ, env, clear=True):
             self.assertEqual(rg._require_tenant(), ("U", "P"))
 
     def test_blank_strings_treated_as_missing(self):
-        env = {"REDAMON_USER_ID": "  ", "REDAMON_PROJECT_ID": "P"}
+        env = {"ANVESHAK_USER_ID": "  ", "ANVESHAK_PROJECT_ID": "P"}
         with mock.patch.dict(os.environ, env, clear=True):
             with self.assertRaises(SystemExit):
                 rg._require_tenant()
@@ -328,7 +328,7 @@ class TestParser(unittest.TestCase):
         self.assertTrue(ns.show)
 
     def test_ask_unquoted_multi_word(self):
-        # Regression: `redagraph ask domain list` must not error.
+        # Regression: `anveshakgraph ask domain list` must not error.
         ns = self.p.parse_args(["ask", "domain", "list"])
         self.assertEqual(ns.question, ["domain", "list"])
 
@@ -423,14 +423,14 @@ class TestReadInitFrame(unittest.TestCase):
     def test_init_frame_parsed(self):
         ws = _FakeWS([json.dumps({"type": "init", "user_id": "U", "project_id": "P"})])
         env, replay = self._run(ws)
-        self.assertEqual(env, {"REDAMON_USER_ID": "U", "REDAMON_PROJECT_ID": "P"})
+        self.assertEqual(env, {"ANVESHAK_USER_ID": "U", "ANVESHAK_PROJECT_ID": "P"})
         self.assertEqual(replay, b"")
 
     def test_init_with_blank_user_is_skipped(self):
         ws = _FakeWS([json.dumps({"type": "init", "user_id": "", "project_id": "P"})])
         env, replay = self._run(ws)
-        self.assertNotIn("REDAMON_USER_ID", env)
-        self.assertEqual(env.get("REDAMON_PROJECT_ID"), "P")
+        self.assertNotIn("ANVESHAK_USER_ID", env)
+        self.assertEqual(env.get("ANVESHAK_PROJECT_ID"), "P")
         self.assertEqual(replay, b"")
 
     def test_non_init_json_is_replayed(self):

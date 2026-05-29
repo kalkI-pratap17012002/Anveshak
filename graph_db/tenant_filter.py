@@ -6,7 +6,7 @@ Single source of truth for:
 - Read-only enforcement (write-clause and write-procedure detection).
 
 Imported by both the agent (agentic.tools.Neo4jToolManager) and the
-kali-sandbox CLI (mcp/servers/redagraph.py).
+kali-sandbox CLI (mcp/servers/anveshakgraph.py).
 """
 
 import re
